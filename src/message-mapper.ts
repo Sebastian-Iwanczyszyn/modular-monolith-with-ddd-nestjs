@@ -4,7 +4,6 @@ export enum CommandMapper {
   CompletePayment = 'payment-service.command.payment.complete',
   FailPayment = 'payment-service.command.payment.fail',
   PaymentSuccess = 'payment-service.command.payment.success',
-  PaymentFailed = 'payment-service.command.payment.failed',
   MarkOrderPaid = 'payment-service.command.order.paid',
   MarkOrderInProgress = 'payment-service.command.order.in_progress',
   CompleteOrder = 'payment-service.command.order.completed',

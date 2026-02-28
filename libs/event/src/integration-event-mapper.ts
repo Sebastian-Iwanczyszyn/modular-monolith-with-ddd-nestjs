@@ -1,4 +1,4 @@
 export enum IntegrationEventMapper {
-  PaymentCompletedIntegrationEvent = 'PaymentCompletedIntegrationEvent',
-  OrderCreatedIntegrationEvent = 'OrderCreatedIntegrationEvent',
+  PaymentCompletedIntegrationEvent = 'payment.integration-event.payment.completed',
+  OrderCreatedIntegrationEvent = 'order.integration-event.order.created',
 }

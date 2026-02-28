@@ -35,7 +35,7 @@ export class Order extends AggregateRoot {
       OrderState.WAITING_PAYMENT,
       userId,
     );
-    order.recordEvent(new OrderCreated(id.toString()));
+    order.recordEvent(new OrderCreated(id.toString(), userId.toString()));
 
     return order;
   }
@@ -55,7 +55,7 @@ export class Order extends AggregateRoot {
     if (this.state !== OrderState.WAITING_PAYMENT) {
       throw new Error('Only waiting payment orders can be marked as paid');
     }
-    this.recordEvent(new OrderPaid(this.id.toString()));
+    this.recordEvent(new OrderPaid(this.id.toString(), this.userId.toString()));
   }
 
   public markInProgress(): void {
@@ -70,7 +70,7 @@ export class Order extends AggregateRoot {
       throw new Error('Only in-progress orders can be completed');
     }
     this.state = OrderState.COMPLETED;
-    this.recordEvent(new OrderCompleted(this.id.toString()));
+    this.recordEvent(new OrderCompleted(this.id.toString(), this.userId.toString()));
   }
 
   public cancel(): void {
@@ -81,7 +81,7 @@ export class Order extends AggregateRoot {
       return;
     }
     this.state = OrderState.CANCELLED;
-    this.recordEvent(new OrderCancelled(this.id.toString()));
+    this.recordEvent(new OrderCancelled(this.id.toString(), this.userId.toString()));
   }
 
   toSnapshot(): Snapshot {

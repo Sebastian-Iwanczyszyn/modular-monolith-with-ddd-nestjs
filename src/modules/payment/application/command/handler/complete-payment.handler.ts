@@ -18,9 +18,11 @@ export class CompletePaymentHandler implements IMessageHandler<CompletePayment> 
     const payment = await this.paymentRepository.getById(command.id);
     payment.complete();
     await this.paymentRepository.store(payment);
+    const snapshot = payment.toSnapshot();
     await this.integrationEventBus.dispatch(new PaymentCompletedIntegrationEvent(
-      payment.id.toString(),
-      payment.toSnapshot().orderId,
+      snapshot.id,
+      snapshot.orderId,
+      snapshot.userId,
     ));
   }
 }

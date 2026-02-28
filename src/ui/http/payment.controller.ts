@@ -1,14 +1,18 @@
-import { Body, Controller, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Inject, Param, Post } from '@nestjs/common';
 import { CommandBus } from '../../common/messaging/messaging.bus';
-import { CreateOrder } from '../../modules/order/application/command/create-order';
-import { Uuid } from '@nestjstools/domain-driven-starter';
-import { IsNotEmpty, IsString } from 'class-validator';
 import { CompletePayment } from '../../modules/payment/application/command/complete-payment';
 import { FailPayment } from '../../modules/payment/application/command/fail-payment';
+import { PaymentQuery, PaymentReadModel } from '../../modules/payment/application/query/payment-query';
 
 @Controller('/api/payments')
 export class PaymentController {
-  constructor(private readonly commandBus: CommandBus) {
+  constructor(private readonly commandBus: CommandBus, @Inject(PaymentQuery) private readonly paymentQuery: PaymentQuery) {
+  }
+
+  @Get('/order/:orderId')
+  @HttpCode(HttpStatus.OK)
+  async getByOrderId(@Param('orderId') orderId: string): Promise<PaymentReadModel> {
+    return this.paymentQuery.getByOrderId(orderId);
   }
 
   @Post(':id/complete')

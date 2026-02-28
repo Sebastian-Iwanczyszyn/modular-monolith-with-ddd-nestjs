@@ -1,6 +1,7 @@
 export class OrderCreated {
   constructor(
     public readonly id: string,
+    public readonly userId: string,
   ) {
   }
 }
@@ -8,6 +9,7 @@ export class OrderCreated {
 export class OrderPaid {
   constructor(
     public readonly id: string,
+    public readonly userId: string,
   ) {
   }
 }
@@ -15,6 +17,7 @@ export class OrderPaid {
 export class OrderCompleted {
   constructor(
     public readonly id: string,
+    public readonly userId: string,
   ) {
   }
 }
@@ -22,6 +25,7 @@ export class OrderCompleted {
 export class OrderCancelled {
   constructor(
     public readonly id: string,
+    public readonly userId: string,
   ) {
   }
 }

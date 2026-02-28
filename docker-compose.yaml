@@ -1,0 +1,21 @@
+services:
+
+  database:
+    container_name: database
+    image: postgres:17
+    environment:
+      POSTGRES_USER: db_user
+      POSTGRES_PASSWORD: db_password
+      POSTGRES_DB: modular_monolith
+    ports:
+      - "5431:5432"
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:4.1.0-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"

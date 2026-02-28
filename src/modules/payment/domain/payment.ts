@@ -34,7 +34,7 @@ export class Payment extends AggregateRoot {
       orderId,
       userId,
     );
-    payment.recordEvent(new PaymentCreated(id.toString()));
+    payment.recordEvent(new PaymentCreated(id.toString(), userId.toString()));
     return payment;
   }
 
@@ -55,7 +55,7 @@ export class Payment extends AggregateRoot {
       throw new Error('Only pending payments can be completed');
     }
     this.state = PaymentState.COMPLETED;
-    this.recordEvent(new PaymentCompleted(this.id.toString()));
+    this.recordEvent(new PaymentCompleted(this.id.toString(), this.userId.toString()));
   }
 
   fail(): void {
@@ -63,7 +63,7 @@ export class Payment extends AggregateRoot {
       throw new Error('Only pending payments can be failed');
     }
     this.state = PaymentState.FAILED;
-    this.recordEvent(new PaymentFailed(this.id.toString()));
+    this.recordEvent(new PaymentFailed(this.id.toString(), this.userId.toString()));
   }
 
   toSnapshot(): Snapshot {
