@@ -1,32 +1,5 @@
 # Modular Monolith with DDD in NestJS
 
-```mermaid
-graph TD
-    subgraph UI ["Presentation / UI Layer"]
-        A[HTTP & WebSocket]
-        B[Controllers & Gateways]
-    end
-
-    subgraph Application ["Application Layer"]
-        C[Commands & Queries]
-        E[Domain Coordination]
-    end
-
-    subgraph Domain ["Domain Layer"]
-        F[Aggregates]
-        G[Domain Events]
-    end
-
-    subgraph Infrastructure ["Infrastructure Layer"]
-        H[Database Repositories]
-        I[RabbitMQ]
-    end
-
-    UI --> Application
-    Application --> Domain
-    Domain --> Infrastructure
-```
-
 ### Motivation
 
 This project demonstrates how to build a modular monolith in NestJS using well-established architectural patterns such as:
@@ -108,6 +81,33 @@ flowchart TB
     Inbound --> App
     App --> Core
     App --> Outbound
+```
+
+```mermaid
+graph TD
+    subgraph UI ["Presentation / UI Layer"]
+        A[HTTP & WebSocket]
+        B[Controllers & Gateways]
+    end
+
+    subgraph Application ["Application Layer"]
+        C[Commands & Queries]
+        E[Domain Coordination]
+    end
+
+    subgraph Domain ["Domain Layer"]
+        F[Aggregates]
+        G[Domain Events]
+    end
+
+    subgraph Infrastructure ["Infrastructure Layer"]
+        H[Database Repositories]
+        I[RabbitMQ]
+    end
+
+    UI --> Application
+    Application --> Domain
+    Domain --> Infrastructure
 ```
 
 ---
