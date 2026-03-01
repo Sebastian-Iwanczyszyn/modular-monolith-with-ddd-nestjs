@@ -21,6 +21,14 @@ The goal is not to add unnecessary complexity, but to introduce structural disci
 * Keep business rules independent from persistence and transport layers
 * Enable long-term maintainability and evolution
 
+### QuickLinks in repository:
+* [Integration events dir](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/libs/event/src)
+* [Messaging dir](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/src/common/messaging)
+* [Message mapper](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/blob/main/src/message-mapper.ts)
+* [Order dir](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/src/modules/order)
+* [Payment dir](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/src/modules/payment)
+* [UI](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/src/ui)
+
 ## Run project
 ### To run this project locally, you need:
 
