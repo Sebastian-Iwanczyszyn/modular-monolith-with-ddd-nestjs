@@ -368,4 +368,5 @@ To keep the demo lightweight, it **does not include**:
 * **Separate worker process for async workloads** (background processing runs are not split into a dedicated service)
 * **Split runtimes per UI layer** (HTTP and WebSocket are not deployed/run as separate applications)
 * **Authentication / Authorization** (no identity provider, guards, RBAC, etc.)
+* Db transactions, I recommend to use https://papooch.github.io/nestjs-cls/plugins/available-plugins/transactional
 
