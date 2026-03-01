@@ -16,4 +16,5 @@ export enum EventMapper {
   PaymentCreated = 'payment-service.event.payment.created',
   PaymentSucceeded = 'payment-service.event.payment.succeeded',
   PaymentFailed = 'payment-service.event.payment.failed',
+  PaymentCompleted = 'payment-service.event.payment.completed',
 }
