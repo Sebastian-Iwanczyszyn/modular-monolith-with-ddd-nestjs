@@ -38,11 +38,6 @@ The goal is not to add unnecessary complexity, but to introduce structural disci
 git clone https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs.git
 make start
 ```
-## Core Libraries in-use
-* MessageBus
-  * https://www.npmjs.com/package/@nestjstools/messaging
-  * https://www.npmjs.com/package/@nestjstools/messaging-rabbitmq-extension
-* Typeorm https://typeorm.io/
 
 ## Execution Model in This Repository
 
