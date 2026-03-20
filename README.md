@@ -14,7 +14,7 @@ The goal is not to add unnecessary complexity, but to introduce structural disci
 
 ### Live demo for tracing events from repository: https://demo.nestjstools.com
 
-<img src="./demo.gif" width="600" />
+<img src="./demo.gif" width="800" />
 
 ### This architecture is designed to:
 
@@ -31,6 +31,18 @@ The goal is not to add unnecessary complexity, but to introduce structural disci
 * [Payment dir](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/src/modules/payment)
 * [UI](https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nestjs/tree/main/src/ui)
 
+## High-Level Directory Architecture
+
+This repository is organized as a modular monolith.
+Each business capability lives in its own module and keeps its own domain, application logic, and infrastructure adapters.
+
+### Rule of thumb
+
+* `domain` says **what the business means**
+* `application` says **what use case is being executed**
+* `infrastructure` says **how it is technically done**
+* `ui` says **how the outside world enters the system**
+
 ## Run project
 ### To run this project locally, you need:
 
@@ -41,7 +53,7 @@ git clone https://github.com/Sebastian-Iwanczyszyn/modular-monolith-with-ddd-nes
 make start
 ```
 
-## Execution Model in This Repository
+## Execution Model in This Repository / Architecture
 
 ### Command Handler Execution Flow
 ![handler-flow.jpg](assets/handler-flow.jpg)
@@ -88,6 +100,8 @@ flowchart TB
     App --> Outbound
 ```
 
+---
+
 ```mermaid
 graph TD
     subgraph UI ["Presentation / UI Layer"]
@@ -113,6 +127,43 @@ graph TD
     UI --> Application
     Application --> Domain
     Domain --> Infrastructure
+```
+---
+
+### Structure
+
+```text
+src
+  common
+    messaging           shared technical infrastructure
+
+  modules
+    order
+      domain            business rules, aggregates, value objects, events
+      application       commands, handlers, queries, use-case orchestration
+      infrastructure    repository implementations, schemas, adapters
+
+    payment
+      domain
+      application
+      infrastructure
+
+    shipment
+      domain
+      application
+      infrastructure
+
+    notification        simple port-adapter module, not full DDD
+      port
+      adapter
+      handler
+
+  ui
+    http                REST controllers
+    ws                  WebSocket gateway
+
+libs                    Shared stuff between modules
+  event                 integration event contracts shared between modules
 ```
 
 ---
@@ -366,4 +417,3 @@ To keep the demo lightweight, it **does not include**:
 * **Split runtimes per UI layer** (HTTP and WebSocket are not deployed/run as separate applications)
 * **Authentication / Authorization** (no identity provider, guards, RBAC, etc.)
 * Db transactions, I recommend to use https://papooch.github.io/nestjs-cls/plugins/available-plugins/transactional
-
