@@ -3,8 +3,11 @@ import { configDotenv } from 'dotenv';
 
 configDotenv();
 
+const env = process.env.NODE_ENV || 'development';
+
 export class Environemnt {
-  static readonly NODE_ENV = process.env.NODE_ENV || 'development';
+  static readonly NODE_ENV = env;
+  static readonly IS_TEST = 'test' === env;
   static readonly PORT = Number(process.env.PORT ?? 3000);
   static readonly DB_HOST = process.env.DB_HOST ?? 'localhost';
   static readonly DB_PORT = Number(process.env.DB_PORT ?? 5431);

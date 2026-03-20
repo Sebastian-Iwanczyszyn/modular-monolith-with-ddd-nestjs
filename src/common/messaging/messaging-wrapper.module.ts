@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { InMemoryChannelConfig, MessagingModule } from '@nestjstools/messaging';
 import { CommandBus, DomainEventBus, IntegrationEventBus } from './messaging.bus';
-import { WebsocketTraceMiddleware } from './websocket-trace.middleware';
+import { WebsocketTraceHook } from './websocket-trace-hook.service';
 import { RxjsNotifier } from './rxjs.notifier';
 import {
   ExchangeType,
@@ -23,22 +23,19 @@ import { Environemnt } from '../../environemnt';
         channels: ['sync-event.channel'],
       }, {
         name: 'integration-event.bus',
-        channels: ['integration-event.channel'],
+        channels: [!Environemnt.IS_TEST ? 'integration-event.channel' : 'sync-event.channel'],
       }],
       channels: [
         new InMemoryChannelConfig({
           name: 'sync-command.channel',
-          middlewares: [WebsocketTraceMiddleware],
         }),
         new InMemoryChannelConfig({
           name: 'sync-event.channel',
           avoidErrorsForNotExistedHandlers: true,
-          middlewares: [WebsocketTraceMiddleware],
         }),
         new RmqChannelConfig({
           name: 'integration-event.channel',
           avoidErrorsForNotExistedHandlers: true,
-          middlewares: [WebsocketTraceMiddleware],
           queue: 'integration-event-queue',
           exchangeType: ExchangeType.TOPIC,
           exchangeName: 'event.exchange',
@@ -53,7 +50,7 @@ import { Environemnt } from '../../environemnt';
     CommandBus,
     IntegrationEventBus,
     DomainEventBus,
-    WebsocketTraceMiddleware,
+    WebsocketTraceHook,
     RxjsNotifier
   ],
   exports: [

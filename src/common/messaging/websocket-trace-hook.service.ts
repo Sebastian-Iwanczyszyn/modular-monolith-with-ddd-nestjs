@@ -1,4 +1,9 @@
-import { MessagingMiddleware, Middleware, MiddlewareContext, RoutingMessage } from '@nestjstools/messaging';
+import {
+  HookMessage,
+  LifecycleHook,
+  MessagingLifecycleHook,
+  MessagingLifecycleHookListener,
+} from '@nestjstools/messaging';
 import { Injectable } from '@nestjs/common';
 import { Notification, RxjsNotifier } from './rxjs.notifier';
 
@@ -6,12 +11,12 @@ function hasUserId(x: unknown): x is { userId?: string } {
   return typeof x === 'object' && x !== null && 'userId' in x;
 }
 
-@MessagingMiddleware()
 @Injectable()
-export class WebsocketTraceMiddleware implements Middleware {
+@MessagingLifecycleHook(LifecycleHook.AFTER_MESSAGE_DENORMALIZED)
+export class WebsocketTraceHook implements MessagingLifecycleHookListener {
   constructor(private readonly notifier: RxjsNotifier<Notification>) {}
 
-  async process(message: RoutingMessage, context: MiddlewareContext): Promise<MiddlewareContext> {
+  hook(message: HookMessage): Promise<void> {
     const payload = message.message as unknown;
 
     const userId =
@@ -20,9 +25,9 @@ export class WebsocketTraceMiddleware implements Middleware {
         : undefined;
 
     if (userId) {
-      this.notifier.notify(new Notification(message.messageRoutingKey, userId));
+      this.notifier.notify(new Notification(message.routingKey, userId));
     }
 
-    return context.next().process(message, context);
+    return Promise.resolve();
   }
 }

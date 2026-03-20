@@ -40,7 +40,7 @@ export class Order extends AggregateRoot {
     return order;
   }
 
-  public static fromSnapshot(snapshot: Snapshot): Order {
+  public static fromSnapshot(snapshot: OrderSnapshot): Order {
     return new Order(
       Uuid.fromString(snapshot.id),
       Uuid.fromString(snapshot.productId),
@@ -84,7 +84,7 @@ export class Order extends AggregateRoot {
     this.recordEvent(new OrderCancelled(this.id.toString(), this.userId.toString()));
   }
 
-  toSnapshot(): Snapshot {
+  toSnapshot(): OrderSnapshot {
     return {
       id: this.id.toString(),
       productId: this.productId.toString(),
@@ -96,7 +96,7 @@ export class Order extends AggregateRoot {
   }
 }
 
-export interface Snapshot {
+export interface OrderSnapshot {
   id: string;
   productId: string;
   amount: string;

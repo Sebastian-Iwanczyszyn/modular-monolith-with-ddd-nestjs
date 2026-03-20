@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Payment, Snapshot } from '../../domain/payment';
+import { Payment, PaymentSnapshot } from '../../domain/payment';
 import { PaymentRepository } from '../../domain/payment-repository';
 import { PaymentSchema } from './payment.schema';
 import { DomainEventBus } from '../../../../common/messaging/messaging.bus';
@@ -9,7 +9,7 @@ import { DomainEventBus } from '../../../../common/messaging/messaging.bus';
 @Injectable()
 export class TypeOrmPaymentRepository implements PaymentRepository {
   constructor(
-    @InjectRepository(PaymentSchema) private readonly repository: Repository<Snapshot>,
+    @InjectRepository(PaymentSchema) private readonly repository: Repository<PaymentSnapshot>,
     private readonly eventBus: DomainEventBus,
   ) {
   }

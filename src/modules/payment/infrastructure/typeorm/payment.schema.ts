@@ -1,8 +1,8 @@
 import { EntitySchema } from 'typeorm';
-import { Snapshot } from '../../domain/payment';
+import { PaymentSnapshot } from '../../domain/payment';
 import { PaymentState } from '../../domain/value-object/payment-state';
 
-export const PaymentSchema = new EntitySchema<Snapshot>({
+export const PaymentSchema = new EntitySchema<PaymentSnapshot>({
   name: 'payments',
   columns: {
     id: {

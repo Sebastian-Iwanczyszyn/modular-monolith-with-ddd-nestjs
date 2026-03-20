@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Snapshot } from '../../domain/payment';
+import { PaymentSnapshot } from '../../domain/payment';
 import { PaymentSchema } from './payment.schema';
 import { PaymentQuery, PaymentReadModel } from '../../application/query/payment-query';
 
 @Injectable()
 export class TypeormPaymentQuery implements PaymentQuery {
   constructor(
-    @InjectRepository(PaymentSchema) private readonly repository: Repository<Snapshot>,
+    @InjectRepository(PaymentSchema) private readonly repository: Repository<PaymentSnapshot>,
   ) {
   }
 

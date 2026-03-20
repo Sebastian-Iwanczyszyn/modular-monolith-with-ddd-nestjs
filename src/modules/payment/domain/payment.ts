@@ -38,7 +38,7 @@ export class Payment extends AggregateRoot {
     return payment;
   }
 
-  public static fromSnapshot(snapshot: Snapshot): Payment {
+  public static fromSnapshot(snapshot: PaymentSnapshot): Payment {
     return new Payment(
       Uuid.fromString(snapshot.id),
       snapshot.externalId,
@@ -66,7 +66,7 @@ export class Payment extends AggregateRoot {
     this.recordEvent(new PaymentFailed(this.id.toString(), this.userId.toString()));
   }
 
-  toSnapshot(): Snapshot {
+  toSnapshot(): PaymentSnapshot {
     return {
       id: this.id.toString(),
       externalId: this.externalId,
@@ -79,7 +79,7 @@ export class Payment extends AggregateRoot {
   }
 }
 
-export interface Snapshot {
+export interface PaymentSnapshot {
   id: string;
   externalId: string;
   amount: string;

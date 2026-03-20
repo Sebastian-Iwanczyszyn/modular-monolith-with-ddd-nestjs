@@ -1,8 +1,8 @@
 import { EntitySchema } from 'typeorm';
-import { Snapshot } from '../../domain/order';
+import { OrderSnapshot } from '../../domain/order';
 import { OrderState } from '../../domain/value-object/order-state';
 
-export type OrderRecord = Snapshot;
+export type OrderRecord = OrderSnapshot;
 
 export const OrderSchema = new EntitySchema<OrderRecord>({
   name: 'orders',

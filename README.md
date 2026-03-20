@@ -14,6 +14,8 @@ The goal is not to add unnecessary complexity, but to introduce structural disci
 
 ### Live demo for tracing events from repository: https://demo.nestjstools.com
 
+<img src="./demo.gif" width="600" />
+
 ### This architecture is designed to:
 
 * Protect the domain from framework and infrastructure concerns

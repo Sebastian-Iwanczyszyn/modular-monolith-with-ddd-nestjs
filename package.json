@@ -28,7 +28,7 @@
     "@nestjs/typeorm": "^11.0.0",
     "@nestjs/websockets": "^11.0.1",
     "@nestjstools/domain-driven-starter": "^1.0.1",
-    "@nestjstools/messaging": "^4.0.0",
+    "@nestjstools/messaging": "^4.2.0",
     "@nestjstools/messaging-rabbitmq-extension": "^4.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",

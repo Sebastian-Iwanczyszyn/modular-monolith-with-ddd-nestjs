@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Snapshot } from '../../domain/order';
+import { OrderSnapshot } from '../../domain/order';
 import { OrderSchema } from './order.schema';
 import { OrderQuery, OrderReadModel } from '../../application/query/order-query';
 
 @Injectable()
 export class TypeormOrderQuery implements OrderQuery {
   constructor(
-    @InjectRepository(OrderSchema) private readonly repository: Repository<Snapshot>,
+    @InjectRepository(OrderSchema) private readonly repository: Repository<OrderSnapshot>,
   ) {
   }
 

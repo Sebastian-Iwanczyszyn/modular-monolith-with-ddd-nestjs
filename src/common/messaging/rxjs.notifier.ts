@@ -1,5 +1,4 @@
 import { Observable, Subject } from 'rxjs';
-import { Injectable } from '@nestjs/common';
 
 export class Notification {
   constructor(
@@ -9,7 +8,6 @@ export class Notification {
   }
 }
 
-@Injectable()
 export class RxjsNotifier<Notification> {
   private readonly subject = new Subject<Notification>();
 
